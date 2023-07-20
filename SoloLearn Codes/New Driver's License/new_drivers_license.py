@@ -1,0 +1,6 @@
+name = input()
+agents = int(input())
+others = input().split()
+others.append(name)
+others.sort()
+print((others.index(name) // agents + 1) * 20)
