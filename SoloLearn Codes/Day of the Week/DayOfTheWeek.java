@@ -5,7 +5,7 @@ public class DayOfTheWeek
 {
 	public static void main(String[] args) throws ParseException {
 		String s = new Scanner(System.in).nextLine();
-		Date date = Character.isLetter(s.charAt(0)) ? new SimpleDateFormat("MMMM dd, yyyy").parse(s) : new SimpleDateFormat("MM/dd/yyyy").parse(s);
+		Date date = new SimpleDateFormat(Character.isLetter(s.charAt(0)) ? "MMMM dd, yyyy" : "MM/dd/yyyy").parse(s);
 		System.out.println(new SimpleDateFormat("EEEE").format(date));
 	}
 }

@@ -1,0 +1,1 @@
+puts(gets.chomp.split(",").map{ |x| x.to_f }.map{ |a| a < 20 ? a * 1.07 : a }.sum)

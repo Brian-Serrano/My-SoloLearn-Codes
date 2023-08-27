@@ -1,0 +1,1 @@
+print(Int(Int(Int(readLine()!)! / 2) / 3))

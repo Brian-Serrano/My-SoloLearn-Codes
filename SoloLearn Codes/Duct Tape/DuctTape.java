@@ -6,10 +6,6 @@ public class DuctTape
 		Scanner sc = new Scanner(System.in);
         int height = sc.nextInt();
         int width = sc.nextInt();
-        System.out.println(getRolls(width, height));
+        System.out.println((int) Math.ceil(((width * height) * 2) / 10.0));
 	}
-
-    public static int getRolls(int width, int height) {
-        return (int) Math.ceil(((width * height) * 2) / 10.0);
-    }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
-using System.Text;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace SoloLearn
 {
@@ -7,11 +8,11 @@ namespace SoloLearn
     {
         static void Main(string[] args)
         {
-            string s = Console.ReadLine();
-            int n = Convert.ToInt32(Console.ReadLine());
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < s.Length; i++) sb.Append(i != 0 && i % n == 0 ? "-" + s[i].ToString() : s[i].ToString());
-            Console.WriteLine(sb.ToString());
+            string text = Console.ReadLine();
+            int count = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine(string.Join("-", Regex
+                .Matches(text, ".{1," + count + "}")
+                .Cast<Match>().Select(x => x.Value)));
         }
     }
 }

@@ -27,7 +27,8 @@ int main() {
 
     for (size_t i = 0; i < v[0].length(); i++) {
         for (size_t j = i + 1; j < v[0].length() + 1; j++) {
-            if(isSub(v[0].substr(i, j - i), v)) if (v[0].substr(i, j - i).length() > lon_com_sub.length()) lon_com_sub = v[0].substr(i, j - i);
+            string sub = v[0].substr(i, j - i);
+            if(isSub(sub, v) && sub.length() > lon_com_sub.length()) lon_com_sub = sub;
         }
     }
 

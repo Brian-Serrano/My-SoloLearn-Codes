@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace SoloLearn
 {
@@ -6,11 +7,10 @@ namespace SoloLearn
     {
         static void Main(string[] args)
         {
-            string myName = Console.ReadLine();
-            int agents = int.Parse(Console.ReadLine());
-            string[] names = (myName + " " + Console.ReadLine()).Split(' ');
-            Array.Sort(names);
-            Console.WriteLine(20 * (Array.IndexOf(names, myName) / agents + 1));
+            string n = Console.ReadLine();
+            int a = int.Parse(Console.ReadLine());
+            int pos = Console.ReadLine().Split(' ').Where(x => string.Compare(x, n) < 0).Count();
+            Console.WriteLine(20 * (pos / a + 1));
         }
     }
 }

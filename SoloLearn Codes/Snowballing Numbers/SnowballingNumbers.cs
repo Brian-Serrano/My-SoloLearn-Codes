@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace SoloLearn
 {
@@ -6,20 +7,14 @@ namespace SoloLearn
     {
         static void Main(string[] args)
         {
-            int[] numbers = new int[Convert.ToInt32(Console.ReadLine())];
-            for (int i = 0; i < numbers.Length; i++) numbers[i] = Convert.ToInt32(Console.ReadLine());
-            int sum = 0;
-            bool r = true;
-            for (int x = 0; x < numbers.Length; x++)
-            {
-                if (x > 0 && numbers[x] <= sum)
-                {
-                    r = false;
-                    break;
-                }
-                sum += numbers[x];
-            }
-            Console.WriteLine(r.ToString().ToLower());
+            int number = Convert.ToInt32(Console.ReadLine());
+            int[] numbers = new int[number]
+                .Select(x => Convert.ToInt32(Console.ReadLine()))
+                .ToArray();
+            Console.WriteLine(Enumerable.Range(0, number)
+                .All(x => Enumerable.Range(0, x)
+                .Select(y => numbers[y])
+                .Sum() < numbers[x]) ? "true" : "false");
         }
     }
 }

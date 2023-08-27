@@ -1,0 +1,1 @@
+puts(gets.chomp.downcase.chars.select{ |x| "aeiou".include?(x) }.length)

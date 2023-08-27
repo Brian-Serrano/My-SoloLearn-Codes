@@ -1,0 +1,1 @@
+print(10 + (Int(readLine()!)! / 20) * 20)

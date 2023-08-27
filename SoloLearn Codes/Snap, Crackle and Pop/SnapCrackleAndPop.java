@@ -6,12 +6,7 @@ public class SnapCrackleAndPop
 		Scanner sc = new Scanner(System.in);
         for(int i = 0; i < 6; i++) {
             int bowl = sc.nextInt();
-            if(bowl % 3 == 0) {
-                System.out.print("Pop ");
-            }
-            else {
-                System.out.print(bowl % 2 == 0 ? "Crackle " : "Snap ");
-            }
+            System.out.print(bowl % 3 == 0 ? "Pop " : bowl % 2 == 0 ? "Crackle " : "Snap ");
         }
 	}
 }

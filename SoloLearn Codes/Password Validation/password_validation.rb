@@ -1,0 +1,1 @@
+puts(gets.chomp.match?(/((?=.*[!@#$%&*])(?=.*[0-9]).{7,})/) ? "Strong" : "Weak")

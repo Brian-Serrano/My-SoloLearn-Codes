@@ -1,56 +1,48 @@
 import java.util.*;
+import java.util.stream.IntStream;
 
 public class PokerHand {
-    public static void Sop(String p) {
-        System.out.println(p);
-    }
 
     public static void main(String[] args) {
+        String[] hand = new Scanner(System.in).nextLine().split(" ");
+        Map<String, Integer> rankValues = Map.ofEntries(
+                Map.entry("2", 2),
+                Map.entry("3", 3),
+                Map.entry("4", 4),
+                Map.entry("5", 5),
+                Map.entry("6", 6),
+                Map.entry("7", 7),
+                Map.entry("8", 8),
+                Map.entry("9", 9),
+                Map.entry("10", 10),
+                Map.entry("J", 11),
+                Map.entry("Q", 12),
+                Map.entry("K", 13),
+                Map.entry("A", 14)
+        );
+        List<Integer> rank = Arrays.stream(hand)
+                .map(c -> rankValues.get(c.substring(0, c.length() - 1)))
+                .sorted(Comparator.reverseOrder())
+                .toList();
+        List<Integer> frequencies = rank.stream()
+                .map(c -> Collections.frequency(rank, c)).toList();
+        boolean suitFrequency = Arrays.stream(hand)
+                .map(c -> c.charAt(c.length() - 1)).distinct().count() == 1;
+        boolean rankOrder = IntStream.range(1, 5)
+                .allMatch(n -> rank.get(n) + 1 == rank.get(n - 1));
 
-        Scanner sc = new Scanner(System.in);
-        String s = sc.nextLine();
-
-        s = s.replace("2", "02").replace("3", "03").replace("4", "04").replace("5", "05")
-                .replace("6", "06").replace("7", "07").replace("8", "08").replace("9", "09")
-                .replace("J", "11").replace("Q", "12").replace("K", "13").replace("A", "14");
-
-        String[] vs = {"02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14"};
-
-        ArrayList<Integer> hV = new ArrayList<>();
-        hV.clear();
-        for (String v : vs) {
-            int nV = s.length() - s.replace(v, "").length();
-            if (nV != 0) hV.add(nV / 2);
-        }
-
-        String[] suits = {"H", "S", "C", "D"};
-        boolean suited = false;
-        for (String su : suits) {
-            int nSu = s.length() - s.replace(su, "").length();
-            if (nSu == 5) {
-                suited = true;
-                break;
-            }
-        }
-
-        String wos = s.replace("H", "").replace("C", "").replace("S", "").replace("D", "");
-        int[] wosLst = Arrays.stream(wos.split(" ")).mapToInt(Integer::parseInt).toArray();
-        int sm = Arrays.stream(wosLst).sum();
-        int mn = Arrays.stream(wosLst).min().getAsInt();
-        int mx = Arrays.stream(wosLst).max().getAsInt();
-        int ln = hV.size();
-
-        if (hV.contains(2) && ln == 4) Sop("One Pair");
-        else if (hV.contains(2) && ln == 3) Sop("Two Pairs");
-        else if (hV.contains(3) && ln == 3) Sop("Three of a Kind");
-        else if (hV.contains(3) && ln == 2) Sop("Full House");
-        else if (hV.contains(4) && ln == 2) Sop("Four of a Kind");
-        else if (suited && mx - mn == 4 && mx == 14 && ln == 5) Sop("Royal Flush");
-        else if (suited && mx - mn == 4 && ln == 5) Sop("Straight Flush");
-        else if (suited && mx - mn == 12 && mx == 14 && sm == 28 && ln == 5) Sop("Straight Flush");
-        else if (mx - mn == 12 && mx == 14 && sm == 28 && ln == 5) Sop("Straight");
-        else if (mx - mn == 4 && ln == 5) Sop("Straight");
-        else if (suited) Sop("Flush");
-        else if (!hV.contains(2) && !hV.contains(3) && !hV.contains(4) && mx - mn != 4) Sop("High Card");
+        if(suitFrequency && rankOrder && rank.get(0) == 14) System.out.println("Royal Flush");
+        else if(suitFrequency && rankOrder) System.out.println("Straight Flush");
+        else if(frequencies.get(0) == 4 || frequencies.get(4) == 4)
+            System.out.println("Four of a Kind");
+        else if(Set.of(2, 3).equals(new HashSet<>(Arrays.asList(frequencies.get(4), frequencies.get(0)))))
+            System.out.println("Full House");
+        else if(suitFrequency) System.out.println("Flush");
+        else if(rankOrder) System.out.println("Straight");
+        else if(frequencies.get(2) == 3) System.out.println("Three of a Kind");
+        else if(frequencies.get(1) == 2 && frequencies.get(3) == 2) System.out.println("Two Pairs");
+        else if(rank.stream().distinct().filter(c -> Collections.frequency(rank, c) == 2).count() == 1)
+            System.out.println("One Pair");
+        else System.out.println("High Card");
     }
 }

@@ -4,10 +4,6 @@ import java.util.Scanner;
 public class PasswordValidation
 {
     public static void main(String[] args) {
-        System.out.println(validate(new Scanner(System.in).nextLine()));
+        System.out.println(Pattern.matches("((?=.*[!@#$%&*])(?=.*[0-9]).{7,})", new Scanner(System.in).nextLine()) ? "Strong" : "Weak");
 	}
-    
-    public static String validate(String password) {
-        return Pattern.matches("((?=.*[!@#$%&*])(?=.*[0-9]).{7,})", password) ? "Strong" : "Weak";
-    }
 }

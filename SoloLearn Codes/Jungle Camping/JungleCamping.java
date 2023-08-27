@@ -1,24 +1,14 @@
-import java.util.Scanner;
-import java.util.HashMap;
+import java.util.*;
+import java.util.stream.*;
 
 public class JungleCamping
 {
     public static void main(String[] args) {
-		System.out.println(animalSound(new Scanner(System.in).nextLine().split(" ")));
+        String[] animals = new Scanner(System.in).nextLine().split(" ");
+        Map<String, String> animalList = Map.of("Grr", "Lion", "Rawr", "Tiger", "Ssss", "Snake", "Chirp", "Bird");
+		System.out.println(Arrays.stream(animals)
+                .filter(a -> animalList.containsKey(a))
+                .map(a -> animalList.get(a))
+                .collect(Collectors.joining(" ")));
 	}
-    
-    public static String animalSound(String[] animals) {
-        HashMap<String, String> animalList = new HashMap<>();
-        animalList.put("Grr", "Lion");
-        animalList.put("Rawr", "Tiger");
-        animalList.put("Ssss", "Snake");
-        animalList.put("Chirp", "Bird");
-        StringBuilder sb = new StringBuilder();
-        for(String animal : animals) {
-            if(animalList.containsKey(animal)) {
-                sb.append(animalList.get(animal) + " ");
-            }
-        }
-        return sb.toString();
-    }
 }

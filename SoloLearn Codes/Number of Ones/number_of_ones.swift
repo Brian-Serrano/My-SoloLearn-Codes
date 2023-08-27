@@ -1,0 +1,1 @@
+print(String(Int(readLine()!)!, radix: 2).filter{ $0 == "1" }.count)

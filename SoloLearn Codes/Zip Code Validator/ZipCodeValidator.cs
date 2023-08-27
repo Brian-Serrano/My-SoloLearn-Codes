@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace SoloLearn
 {
@@ -7,8 +7,7 @@ namespace SoloLearn
     {
         static void Main(string[] args)
         {
-            string z = Console.ReadLine();
-            Console.Write(z.Length != 5 || z.Count(c => Char.IsWhiteSpace(c) || !Char.IsDigit(c)) > 0 ? "false" : "true");
+            Console.WriteLine(new Regex("^\\d{5}$").IsMatch(Console.ReadLine()) ? "true" : "false");
         }
     }
 }

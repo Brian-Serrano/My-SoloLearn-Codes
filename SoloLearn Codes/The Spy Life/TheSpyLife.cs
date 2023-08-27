@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace SoloLearn
 {
@@ -6,9 +8,7 @@ namespace SoloLearn
     {
         static void Main(string[] args)
         {
-            char[] a = Console.ReadLine().ToCharArray();
-            Array.Reverse(a);
-            foreach (char c in a) if (char.IsLetter(c) || char.IsWhiteSpace(c)) Console.Write(c);
+            Console.WriteLine(string.Join("", Regex.Replace(Console.ReadLine(), "[^a-zA-Z\\s]", "").Reverse()));
         }
     }
 }

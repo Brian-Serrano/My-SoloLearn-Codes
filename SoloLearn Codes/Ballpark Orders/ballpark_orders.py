@@ -7,9 +7,6 @@ foods = {
 }
 
 items = input().split()
-
-cost = 0
-for i in items:
-    cost += foods[i] if i in foods else foods["Coke"]
+cost = sum(foods[i] if i in foods else foods["Coke"] for i in items)
 
 print(cost + cost * .07)

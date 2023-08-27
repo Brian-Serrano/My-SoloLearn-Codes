@@ -1,0 +1,1 @@
+puts((0...4).map{ |c| gets.chomp.to_i % 15 }.sum)

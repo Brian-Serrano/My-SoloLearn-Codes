@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 
 namespace SoloLearn
 {
@@ -6,8 +7,7 @@ namespace SoloLearn
     {
         static void Main(string[] args)
         {
-            char[] a = Console.ReadLine().ToCharArray();
-            foreach (char c in a) if (char.IsLetter(c) || char.IsDigit(c) || char.IsWhiteSpace(c)) Console.Write(c);
+            Console.WriteLine(Regex.Replace(Console.ReadLine(), "[^a-zA-Z0-9\\s]", ""));
         }
     }
 }

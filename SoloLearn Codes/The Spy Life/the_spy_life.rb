@@ -1,0 +1,1 @@
+puts(gets.chomp.reverse.gsub(/[^a-zA-Z\s]/, ""))

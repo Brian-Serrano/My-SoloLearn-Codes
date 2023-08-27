@@ -1,55 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
-namespace ConsoleApp
+namespace SoloLearn
 {
     class Program
     {
         static void Main(string[] args)
         {
-            string input = Console.ReadLine();
-            string[] arr = input.ToCharArray().Select(c => c.ToString()).ToArray();
-            List<string> sorted = new List<string>(arr);
-            sorted.Sort();
+            Console.WriteLine(FindRank(Console.ReadLine()));
+        }
 
-            int sum = 0;
-            int[] fac = new int[arr.Length];
-            for (int i = 0; i < arr.Length; i++)
+        public static long FindRank(string word)
+        {
+            long rank = 1;
+            long suffixPermCount = 1;
+            Dictionary<char, int> charCounts = new Dictionary<char, int>();
+
+            for (int i = word.Length - 1; i >= 0; i--)
             {
-                for (int j = 0; j < sorted.Count; j++)
+                char x = word[i];
+                int xCount = charCounts.ContainsKey(x) ? charCounts[x] + 1 : 1;
+
+                charCounts[x] = xCount;
+
+                foreach (KeyValuePair<char, int> e in charCounts)
                 {
-                    if (arr[i] == sorted[j])
+                    if (e.Key < x)
                     {
-                        fac[i] = j;
-                        sorted.RemoveAt(j);
-                        break;
+                        rank += suffixPermCount * e.Value / xCount;
                     }
                 }
-                sum += fac[i] * Fact(arr.Length - 1 - i) / FindCommonFact(input.Substring(i));
-            }
-            sum += 1;
-            Console.WriteLine(sum);
-        }
 
-        static int FindCommonFact(string a)
-        {
-            char[] abc = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
-            int result = 1;
-            List<int> common = new List<int>();
-            for (int i = 0; i < abc.Length; i++)
-            {
-                int count = a.Length - a.Replace(abc[i].ToString(), "").Length;
-                if (count > 1) common.Add(count);
+                suffixPermCount *= word.Length - i;
+                suffixPermCount /= xCount;
             }
-            for (int i = 0; i < common.Count; i++) result *= Fact(common[i]);
-            return result;
-        }
 
-        static int Fact(int n)
-        {
-            if (n <= 1) return 1;
-            else return Fact(n -1) * n;
+            return rank;
         }
     }
 }

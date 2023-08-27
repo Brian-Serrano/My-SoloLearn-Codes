@@ -3,10 +3,6 @@ import java.util.Scanner;
 public class LandHo
 {
     public static void main(String[] args) {
-        System.out.println(total(new Scanner(System.in).nextInt()));
+        System.out.println(10 + (new Scanner(System.in).nextInt() / 20) * 20);
 	}
-
-    public static int total(int people) {
-        return 10 + (people / 20) * 20;
-    }
 }

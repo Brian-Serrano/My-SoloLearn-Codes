@@ -7,10 +7,6 @@ public class Roadrunner
         int safety = sc.nextInt();
         int runner = sc.nextInt();
         int coyote = sc.nextInt();
-        System.out.println(message(safety, runner, coyote));
-    }
-
-    public static String message(int safety, int runner, int coyote) {
-        return safety / runner < (safety + 50) / coyote ? "Meep Meep" : "Yum";
+        System.out.println(safety / runner < (safety + 50) / coyote ? "Meep Meep" : "Yum");
     }
 }

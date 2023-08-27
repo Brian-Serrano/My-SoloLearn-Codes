@@ -3,11 +3,7 @@ import java.util.*;
 public class VowelCounter
 {
     public static void main(String[] args) {
-        System.out.println(vowelCount(new Scanner(System.in).nextLine().trim().toLowerCase().split("")));
+        String[] sentence = new Scanner(System.in).nextLine().trim().toLowerCase().split("");
+        System.out.println(Arrays.stream(sentence).filter(s -> "aeiou".contains(s)).count());
 	}
-
-    public static long vowelCount(String[] sentence) {
-        String vowels = "aeiou";
-        return Arrays.stream(sentence).filter(s -> vowels.contains(s)).count();
-    }
 }

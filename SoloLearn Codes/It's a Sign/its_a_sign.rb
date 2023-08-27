@@ -1,0 +1,1 @@
+print((1..4).map{ |x| gets.chomp }.any?{ |x| x == x.reverse } ? "Open" : "Trash")

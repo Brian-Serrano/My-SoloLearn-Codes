@@ -6,9 +6,4 @@ dic = {
 }
 
 snacks = input().split()
-
-points = 0
-for i in snacks:
-    points += dic[i]
-
-print("Come on Down!" if points >= 10 else "Time to wait")
+print("Come on Down!" if sum(dic[i] for i in snacks) >= 10 else "Time to wait")

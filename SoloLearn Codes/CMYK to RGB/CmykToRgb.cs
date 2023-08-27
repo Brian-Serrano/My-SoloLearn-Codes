@@ -7,12 +7,8 @@ namespace SoloLearn
     {
         static void Main(string[] args)
         {
-            float[] CMYK = new float[4];
-            for (int i = 0; i < 4; i++) CMYK[i] = Convert.ToSingle(Console.ReadLine());
-            float[] RGB = new float[3];
-            for (int i = 0; i < 3; i++) RGB[i] = 255 * (1 - CMYK[i]) * (1 - CMYK[3]);
-
-            Console.Write(string.Join(",", RGB.Select(x => string.Format($"{x:0}"))));
+            float[] CMYK = new float[4].Select(x => Convert.ToSingle(Console.ReadLine())).ToArray();
+            Console.Write(string.Join(",", Enumerable.Range(0, 3).Select(x => 255 * (1 - CMYK[x]) * (1 - CMYK[3])).Select(x => string.Format($"{x:0}"))));
         }
     }
 }

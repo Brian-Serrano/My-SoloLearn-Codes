@@ -3,12 +3,7 @@ import java.util.*;
 public class CreditCardValidator
 {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);           
-        String str = sc.nextLine();
-        System.out.println(isValid(new StringBuilder(str).reverse().toString()) ? "valid" : "not valid");
-	}
-
-    public static boolean isValid(String candidate) {
+        String candidate = new StringBuilder(new Scanner(System.in).nextLine()).reverse().toString();
         int[] digits = Arrays
                 .stream(candidate.split(""))
                 .mapToInt(Integer::parseInt)
@@ -17,6 +12,6 @@ public class CreditCardValidator
             digits[i] *= 2;
             if(digits[i] > 9) digits[i] -= 9;
         }
-        return Arrays.stream(digits).sum() % 10 == 0 && digits.length == 16;
-    }
+        System.out.println(Arrays.stream(digits).sum() % 10 == 0 && digits.length == 16 ? "valid" : "not valid");
+	}
 }

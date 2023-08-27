@@ -1,5 +1,1 @@
-def latin(word):
-    return f"{word[1:len(word)]}{word[0]}ay"
-
-
-print(*(latin(word) for word in input().split()))
+print(*(f"{word[1:]}{word[0]}ay" for word in input().split()))

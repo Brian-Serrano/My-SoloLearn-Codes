@@ -1,0 +1,1 @@
+puts(((2.0 / gets.chomp.to_i) * 100).ceil)

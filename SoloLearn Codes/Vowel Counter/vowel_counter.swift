@@ -1,0 +1,1 @@
+print(readLine()!.lowercased().filter{ "aeiou".contains($0) }.count)

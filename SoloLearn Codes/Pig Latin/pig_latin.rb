@@ -1,0 +1,1 @@
+puts(gets.chomp.split.map{ |w| w[1..-1] + w[0] + "ay" }.join(" "))

@@ -2,7 +2,6 @@
 #include <map>
 #include <string>
 #include <sstream>
-#include <vector>
 using namespace std;
 
 int main() {
@@ -13,27 +12,18 @@ int main() {
         {"Water", 4},
         {"Coke", 5}
     };
-
     string str;
     getline(cin, str);
-
-    vector<string> v;
     stringstream ss(str);
-
-    while (getline(ss, str, ' ')) {
-        v.push_back(str);
-    }
-
     double cost = 0;
-    for (string i : v) {
-        if (map.find(i) != map.end()) {
-            cost += map[i];
+    while (getline(ss, str, ' ')) {
+        if (map.find(str) != map.end()) {
+            cost += map[str];
         }
         else {
             cost += map["Coke"];
         }
     }
     cout << cost + cost * .07 << endl;
-
     return 0;
 }

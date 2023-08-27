@@ -1,30 +1,17 @@
 #include <iostream>
-#include <cmath>
 #include <string>
-#include <algorithm>
-#include <vector>
 #include <sstream>
-#include <numeric>
 using namespace std;
 
 int main() {
-
-    string a, tmp;
+    string a;
     getline(cin, a);
-
     stringstream ss(a);
-    vector<float> p;
-
-    while (getline(ss, tmp, ',')) {
-        p.push_back(stof(tmp));
+    int max = 0, total = 0;
+    while (getline(ss, a, ',')) {
+        total += stoi(a);
+        if (stof(a) > max) max = stof(a);
     }
-
-    sort(p.begin(), p.end());
-
-    p.pop_back();
-
-    float s = accumulate(p.begin(), p.end(), 0);
-    cout << floor(s * 0.3 * 0.07 + s * 0.3);
-
+    cout << int(((total - max) * 1.07) * 0.3);
     return 0;
 }

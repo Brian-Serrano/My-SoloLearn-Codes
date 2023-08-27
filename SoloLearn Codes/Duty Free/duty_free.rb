@@ -1,0 +1,1 @@
+puts(gets.chomp.split(" ").any?{ |a| a.to_f >= 20 / 1.1 } ? "Back to the store" : "On to the terminal")

@@ -6,10 +6,6 @@ public class Neverland
         Scanner sc = new Scanner(System.in);
         int age = sc.nextInt();
         int year = sc.nextInt();
-        System.out.println(message(age, year));
+        System.out.println("My twin is " + (age + year) + " years old and they are " + year + " years older than me");
 	}
-
-    public static String message(int age, int year) {
-        return "My twin is " + (age + year) + " years old and they are " + year + " years older than me";
-    }
 }

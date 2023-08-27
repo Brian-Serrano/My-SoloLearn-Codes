@@ -1,0 +1,1 @@
+print(gets.chomp.to_i / 6)

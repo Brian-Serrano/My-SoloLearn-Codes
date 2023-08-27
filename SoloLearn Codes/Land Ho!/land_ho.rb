@@ -1,0 +1,1 @@
+puts(10 + (gets.chomp.to_i / 20) * 20)

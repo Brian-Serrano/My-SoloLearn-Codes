@@ -1,24 +1,25 @@
 #include <iostream>
 #include <sstream>
+#include <string>
 using namespace std;
 
-void animal(string n, string sp = " ")
-{
-    if (n == "Grr") cout << "Lion" << sp;
-    else if (n == "Rawr") cout << "Tiger" << sp;
-    else if (n == "Ssss") cout << "Snake" << sp;
-    else if (n == "Chirp") cout << "Bird" << sp;
-}
-
 int main() {
-    string delimiter = " ";
-    string ns;
-    getline(cin, ns);
-    size_t pos = 0;
-    while ((pos = ns.find(delimiter)) != string::npos) {
-        animal(ns.substr(0, pos), delimiter);
-        ns.erase(0, pos + delimiter.length());
+    string str;
+    getline(cin, str);
+    stringstream ss(str);
+    while (getline(ss, str, ' ')) {
+        if (str == "Grr") {
+            cout << "Lion" << " ";
+        }
+        if (str == "Rawr") {
+            cout << "Tiger" << " ";
+        }
+        if (str == "Ssss") {
+            cout << "Snake" << " ";
+        }
+        if (str == "Chirp") {
+            cout << "Bird" << " ";
+        }
     }
-    animal(ns);
     return 0;
 }

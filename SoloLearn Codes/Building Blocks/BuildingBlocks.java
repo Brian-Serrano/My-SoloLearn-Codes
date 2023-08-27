@@ -8,7 +8,6 @@ public class BuildingBlocks
         System.out.println(Arrays
                 .stream(new int[4])
                 .map(a -> sc.nextInt() % 15)
-                .reduce(Integer::sum)
-                .orElse(0));
+                .sum());
     }
 }

@@ -1,0 +1,1 @@
+print(readLine()!.split(separator: " ").filter { Int($0)! % 2 == 0 }.joined(separator: " "))

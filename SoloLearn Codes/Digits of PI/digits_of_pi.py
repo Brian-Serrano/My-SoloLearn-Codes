@@ -3,5 +3,5 @@ try:
 except ImportError:
     from mpmath import mp
 
-mp.dps = int(input() or 0) + 2
+mp.dps = int(input()) + 2
 print(str(mp.pi)[-2])

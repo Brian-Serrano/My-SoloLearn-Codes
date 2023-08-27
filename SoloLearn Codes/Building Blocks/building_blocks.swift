@@ -1,0 +1,1 @@
+print((0...3).map { x in Int(readLine()!)! % 15 }.reduce(0, +))

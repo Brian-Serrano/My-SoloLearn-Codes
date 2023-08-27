@@ -3,15 +3,9 @@ import java.util.Scanner;
 public class GothamCity
 {
     public static void main(String[] args) {
-        System.out.println(getMessage(new Scanner(System.in).nextInt()));
+        int criminal = new Scanner(System.in).nextInt();
+        if(criminal < 5) System.out.println("I got this!");
+        else if(criminal <= 10) System.out.println("Help me Batman");
+        else System.out.println("Good Luck out there!");
 	}
-
-    public static String getMessage(int criminal) {
-        if(criminal < 5)
-            return "I got this!";
-        else if(criminal <= 10)
-            return "Help me Batman";
-        else
-            return "Good Luck out there!";
-    }
 }

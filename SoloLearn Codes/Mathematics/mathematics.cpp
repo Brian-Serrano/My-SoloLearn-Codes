@@ -22,9 +22,8 @@ int main() {
     cin >> n;
     string r = "none", s;
     while (getline(cin, s, ' ')) {
-        double c = eval(s);
-        if (n == c) {
-            r = string("index ").append(to_string(i));
+        if (n == eval(s)) {
+            r = "index " + to_string(i);
             break;
         }
         i++;

@@ -1,0 +1,1 @@
+print(Int(((2 / Double(readLine()!)!) * 100).rounded(.up)))

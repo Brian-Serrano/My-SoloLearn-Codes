@@ -1,14 +1,12 @@
 import java.util.*;
-import java.lang.*;
 
-public class TextDecompressor
-{
-	public static void main(String[] args) {
-		Scanner input = new Scanner(System.in);
-		char[] s = input.nextLine().toCharArray();
-		for (int i = 0; i < s.length; i++) {
-			if (Character.isDigit(s[i]))
-				System.out.print(String.valueOf(s[i - 1]).repeat(Character.getNumericValue(s[i])));
-		} 
-	}
+public class TextDecompressor {
+
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        String[] s = input.nextLine().split("");
+        for (int i = 0; i < s.length; i += 2) {
+            System.out.print(s[i].repeat(Integer.parseInt(s[i + 1])));
+        }
+    }
 }

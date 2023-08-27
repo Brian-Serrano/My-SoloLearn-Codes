@@ -1,21 +1,13 @@
 #include <iostream>
 #include <string>
-#include <cstring>
 using namespace std;
-
-bool isVowel(char c)
-{
-    string vowels = "aeiou";
-    for (size_t i = 0; i < vowels.length(); i++) if (c == vowels[i]) return true;
-    return false;
-}
 
 int main() {
     int c = 0;
-    string s;
+    string s, vowels = "aeiou";
     getline(cin, s);
 
-    for (char ch : s) if (isVowel(tolower(ch))) c++;
+    for (char ch : s) if (vowels.find(tolower(ch)) != string::npos) c++;
     cout << c;
 
     return 0;

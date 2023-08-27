@@ -1,0 +1,1 @@
+puts(gets.chomp.downcase.bytes.map{ |x| x >= "a".ord && x <= "z".ord ? (25 - (x - "a".ord)) + "a".ord : x }.pack('c*'))

@@ -1,48 +1,32 @@
 import java.util.*;
 
 public class WordRank {
+
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
-        String[] arr = input.split("");
-        ArrayList<String> sorted = new ArrayList<>(Arrays.asList(arr));
-        Collections.sort(sorted);
+        System.out.println(findRank(new Scanner(System.in).nextLine()));
+    }
+    
+    public static long findRank(String word) {
+        long rank = 1;
+        long suffixPermCount = 1;
+        final Map<Character, Integer> charCounts = new HashMap<>();
 
-        int sum = 0;
-        int[] fac = new int[arr.length];
-        for (int i = 0; i < arr.length; i++) {
-            for (int j = 0; j < sorted.size(); j++) {
-                if (arr[i].equals(sorted.get(j))) {
-                    fac[i] = j;
-                    sorted.remove(j);
-                    break;
+        for (int i = word.length() - 1; i >= 0; i--) {
+            char x = word.charAt(i);
+            int xCount = charCounts.containsKey(x) ? charCounts.get(x) + 1 : 1;
+
+            charCounts.put(x, xCount);
+
+            for (Map.Entry<Character, Integer> e : charCounts.entrySet()) {
+                if (e.getKey() < x) {
+                    rank += suffixPermCount * e.getValue() / xCount;
                 }
-
             }
-            sum += fac[i] * fact(arr.length - 1 - i) / findCommonFact(input.substring(i));
+
+            suffixPermCount *= word.length() - i;
+            suffixPermCount /= xCount;
         }
-        System.out.println(++sum);
-    }
 
-    public static int findCommonFact(String a) {
-        String[] alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-        int result = 1;
-        ArrayList<Integer> common = new ArrayList<>();
-        for (String s : alphabet) {
-            int count = a.length() - a.replace(s, "").length();
-            if (count > 1)
-                common.add(count);
-
-        }
-        for (int integer : common) {
-            result *= fact(integer);
-        }
-        return result;
-    }
-
-
-    public static int fact(int n) {
-        if (n <= 1) return 1;
-        else return fact(n - 1) * n;
+        return rank;
     }
 }

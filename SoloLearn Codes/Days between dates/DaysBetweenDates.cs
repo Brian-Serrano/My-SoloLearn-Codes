@@ -6,16 +6,9 @@ namespace SoloLearn
     {
         static void Main(string[] args)
         {
-            string dt1s = Console.ReadLine();
-            string dt2s = Console.ReadLine();
-            Console.WriteLine("{0:dd}", getDate(dt2s).Subtract(getDate(dt1s)));
-        }
-
-        static DateTime getDate(string dt)
-        {
-            string[] a = dt.Split(',');
-            string[] aa = a[0].Split(' ');
-            return new DateTime(Convert.ToInt32(a[1]), DateTime.Parse("1," + aa[0] + " 2020").Month, Convert.ToInt32(aa[1]));
+            string dt1 = Console.ReadLine();
+            string dt2 = Console.ReadLine();
+            Console.WriteLine("{0:dd}", DateTime.Parse(dt2).Subtract(DateTime.Parse(dt1)));
         }
     }
 }

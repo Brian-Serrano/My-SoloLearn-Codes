@@ -1,19 +1,18 @@
 import java.util.*;
+import java.util.regex.MatchResult;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
-public class SplittingString
-{
+public class SplittingString {
+
     public static void main(String[] args) {
-
-        Scanner input = new Scanner(System.in);
-		String[] text = input.nextLine().split("");
-		int step = input.nextInt();
-		System.out.println(splittedString(text, step));
-	}
-
-    public static String splittedString(String[] text, int step) {
-        for(int i = 0; i < text.length - 1; i++) {
-            if((i + 1) % step == 0) text[i] += "-";
-        }
-        return String.join("", text);
+        Scanner sc = new Scanner(System.in);
+        String text = sc.nextLine();
+        int count = sc.nextInt();
+        System.out.println(Pattern
+                .compile(".{1," + count + "}")
+                .matcher(text).results()
+                .map(MatchResult::group)
+                .collect(Collectors.joining("-")));
     }
 }

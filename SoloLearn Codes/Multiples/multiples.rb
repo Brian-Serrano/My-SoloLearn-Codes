@@ -1,0 +1,1 @@
+puts((0..gets.chomp.to_i - 1).select{ |x| x % 3 == 0 || x % 5 == 0 }.sum)

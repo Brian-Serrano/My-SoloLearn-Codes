@@ -10,16 +10,8 @@ int main() {
         cin >> x;
         CMYK.push_back(x);
     }
-
-    float RGB[3];
-    for(int i = 0; i < 3; i++) RGB[i] = 255 * (1 - CMYK[i]) * (1 - CMYK[3]);
-
-    int idx = 0;
-    for (auto x : RGB) {
-        if (idx == 0) printf("%.f", x);
-        else printf(",%.f", x);
-        idx++;
+    for(int i = 0; i < 3; i++) {
+        printf((i == 0) ? "%.f" : ",%.f", 255 * (1 - CMYK[i]) * (1 - CMYK[3]));
     }
-
     return 0;
 }

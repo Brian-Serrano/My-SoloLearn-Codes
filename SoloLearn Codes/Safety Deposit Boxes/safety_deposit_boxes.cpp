@@ -1,28 +1,18 @@
 #include <iostream>
 #include <string>
-#include <vector>
+#include <sstream>
 using namespace std;
 
 int main() {
     string s, fd;
+    int idx = 1;
     getline(cin, s);
     getline(cin, fd);
-
-    string separator = ",";
-    int separatorIndex;
-    vector<string> itms;
-
-    while (s.find(separator) != string::npos) {
-        separatorIndex = s.find(separator);
-        itms.push_back(s.substr(0, separatorIndex));
-        s = s.substr(separatorIndex + 1, s.length());
+    stringstream ss(s);
+    while (getline(ss, s, ',')) {
+        if (s.compare(fd) == 0) break;
+        idx++;
     }
-    itms.push_back(s);
-
-    long unsigned int i;
-    for (i = 0; i < itms.size(); i++) if (itms.at(i) == fd) break;
-
-    cout << (i + 1) * 5;
-
+    cout << idx * 5;
     return 0;
 }

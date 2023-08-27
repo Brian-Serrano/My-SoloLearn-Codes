@@ -1,0 +1,1 @@
+print(readLine()!.split(separator: ",").map{ Double($0)! }.map{ $0 < 20 ? $0 * 1.07 : $0 }.reduce(0, +))

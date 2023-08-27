@@ -1,63 +1,51 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
-
 
 namespace SoloLearn
 {
     class Program
     {
-        static void cw(string p) { Console.WriteLine(p); }
-
         static void Main(string[] args)
         {
-            string s = Console.ReadLine();
-
-            s = s.Replace("2", "02").Replace("3", "03").Replace("4", "04").Replace("5", "05")
-                .Replace("6", "06").Replace("7", "07").Replace("8", "08").Replace("9", "09")
-                .Replace("J", "11").Replace("Q", "12").Replace("K", "13").Replace("A", "14");
-
-            string[] vs = { "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14" };
-
-            List<int> hV = new List<int>();
-            foreach (string v in vs)
+            string[] hand = Console.ReadLine().Split();
+            Dictionary<string, int> rankValues = new Dictionary<string, int>()
             {
-                int nV = s.Length - s.Replace(v, "").Length;
-                if (nV != 0) hV.Add(Convert.ToInt32(nV / 2));
-            }
+                ["2"] = 2,
+                ["3"] = 3,
+                ["4"] = 4,
+                ["5"] = 5,
+                ["6"] = 6,
+                ["7"] = 7,
+                ["8"] = 8,
+                ["9"] = 9,
+                ["10"] = 10,
+                ["J"] = 11,
+                ["Q"] = 12,
+                ["K"] = 13,
+                ["A"] = 14
+            };
+            List<int> rank = hand
+                .Select(x => rankValues[x.Substring(0, x.Length - 1)])
+                .OrderByDescending(x => x).ToList();
+            List<int> frequencies = rank.Select(x => rank.Count(y => x == y)).ToList();
+            bool suitFrequency = hand.Select(x => x[x.Length - 1]).Distinct().Count() == 1;
+            bool rankOrder = Enumerable.Range(1, 4).All(x => rank[x] + 1 == rank[x - 1]);
 
-            string[] suits = { "H", "S", "C", "D" };
-            bool suited = false;
-            foreach (string su in suits)
-            {
-                int nSu = s.Length - s.Replace(su, "").Length;
-                if (nSu == 5)
-                {
-                    suited = true;
-                    break;
-                }
-            }
-
-            string[] wos = s.Replace("H", "").Replace("C", "").Replace("S", "").Replace("D", "").Split();
-            int[] wosInts = wos.Select(int.Parse).ToArray();
-
-            int sm = wosInts.Sum();
-            int mn = wosInts.Min();
-            int mx = wosInts.Max();
-            int ln = hV.Count;
-
-            if (hV.Contains(2) && ln == 4) { cw("One Pair"); }
-            else if (hV.Contains(2) && ln == 3) { cw("Two Pairs"); }
-            else if (hV.Contains(3) && ln == 3) { cw("Three of a Kind"); }
-            else if (hV.Contains(3) && ln == 2) { cw("Full House"); }
-            else if (hV.Contains(4) && ln == 2) { cw("Four of a Kind"); }
-            else if (suited && mx - mn == 4 && mx == 14 && ln == 5) { cw("Royal Flush"); }
-            else if (suited && mx - mn == 4 && ln == 5) { cw("Straight Flush"); }
-            else if (suited && mx - mn == 12 && mx == 14 && sm == 28 && ln == 5) { cw("Straight Flush"); }
-            else if (mx - mn == 12 && mx == 14 && sm == 28 && ln == 5) { cw("Straight"); }
-            else if (mx - mn == 4 && ln == 5) { cw("Straight"); }
-            else if (suited) { cw("Flush"); }
-            else if (!hV.Contains(2) && !hV.Contains(3) && !hV.Contains(4) && mx - mn != 4) { cw("High Card"); }
+            if (suitFrequency && rankOrder && rank[0] == 14) Console.WriteLine("Royal Flush");
+            else if (suitFrequency && rankOrder) Console.WriteLine("Straight Flush");
+            else if (frequencies[0] == 4 || frequencies[4] == 4) Console.WriteLine("Four of a Kind");
+            else if (new HashSet<int> { 2, 3 }
+            .SetEquals(new List<int> { frequencies[4], frequencies[0] }))
+                Console.WriteLine("Full House");
+            else if (suitFrequency) Console.WriteLine("Flush");
+            else if (rankOrder) Console.WriteLine("Straight");
+            else if (frequencies[2] == 3) Console.WriteLine("Three of a Kind");
+            else if (frequencies[1] == 2 && frequencies[3] == 2) Console.WriteLine("Two Pairs");
+            else if (rank.Distinct().Where(x => rank.Count(y => y == x) == 2).Count() == 1)
+                Console.WriteLine("One Pair");
+            else Console.WriteLine("High Card");
         }
     }
 }
